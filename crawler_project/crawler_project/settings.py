@@ -19,7 +19,7 @@ NEWSPIDER_MODULE = 'crawler_project.spiders'
 #USER_AGENT = 'crawler_project (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # limit for spider. Spider close when any limit reach
 # 0 is unlimit

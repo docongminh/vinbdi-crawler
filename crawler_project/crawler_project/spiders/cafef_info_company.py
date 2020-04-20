@@ -2,6 +2,7 @@ import scrapy
 from bs4 import BeautifulSoup
 from scrapy_splash import SplashRequest
 import re
+from scrapy.http import Request
 import os
 import tqdm
 import logging
@@ -37,24 +38,35 @@ class CrawlerInfo(scrapy.Spider):
 
 	def start_requests(self):
 		urls = [
-				"https://s.cafef.vn/Tin-doanh-nghiep/fpt/Event.chn"
+				# "https://s.cafef.vn/Tin-doanh-nghiep/fpt/Event.chn"
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=FPT&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=FPT&floorID=0&configID=0&PageIndex=1&PageSize=30&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=HPS&floorID=0&configID=0&PageIndex=1&PageSize=200&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=CRE&floorID=0&configID=0&PageIndex=1&PageSize=150&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=A32&floorID=0&configID=0&PageIndex=1&PageSize=100&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=AAA&floorID=0&configID=0&PageIndex=1&PageSize=1000&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=ABI&floorID=0&configID=0&PageIndex=1&PageSize=1000&Type=2"
+
+
 		]
 
-		script = """
-			function main(splash)
-			local url = splash.args.url
-			assert(splash:go(url))
-			assert(splash:wait(0.5))
-			assert(splash:runjs("$('.next')[0].click();"))
-			return {
-			html = splash:html(),
-			url = splash:url(),
-			}
-			end
-		"""
+		# script = """
+		# 	function main(splash)
+		# 	local url = splash.args.url
+		# 	assert(splash:go(url))
+		# 	assert(splash:wait(0.5))
+		# 	assert(splash:runjs("$('.next')[0].click();"))
+		# 	return {
+		# 	html = splash:html(),
+		# 	url = splash:url(),
+		# 	}
+		# 	end
+		# """
 
 		for url in urls:
-			yield SplashRequest(url=url, endpoint = "render.html", callback=self.parse)
+			print(">>: ", url)
+			print("ress", scrapy.Request(url=url, method='GET').body)
+			yield scrapy.Request(url=url, method='GET', callback=self.parse)
 			# yield SplashRequest(url=url, callback=self.parse,
 								# endpoint="execute",
 								# args={'wait': 2, 'lua_source': lua_script},)
@@ -86,6 +98,7 @@ class CrawlerInfo(scrapy.Spider):
 		"""
 		all_data = []
 		link_duplicated = []
+		print(">>>response: ", response)
 		for item in tqdm.tqdm(response.css("#divEvents").css("ul").css('li')):
 			link = item.css("a::attr(href)").extract_first()
 			if link not in link_duplicated:
@@ -97,10 +110,13 @@ class CrawlerInfo(scrapy.Spider):
 				}		
 				print(item_crawler)
 				yield response.follow(link, callback=self.parse_detail, meta={'item': item_crawler})
-		for i in range(1, 10):
-			view_more = "https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=FPT&floorID=0&configID=0&PageIndex={}&PageSize=30&Type=2".format(i)
-			if view_more is not None:
-				yield response.follow(view_more, callback=self.parse)
+		# yield SplashRequest(
+  #           url=response.url,
+  #           callback=self.parse,
+  #           meta={
+  #               "splash": {"endpoint": "execute", "args": {"lua_source": self.script}}
+  #           },
+  #       )
 
 	def parse_product_page(self, response):
 		"""
