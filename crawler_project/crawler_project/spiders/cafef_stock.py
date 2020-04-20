@@ -42,7 +42,7 @@ class CrawlerNews(scrapy.Spider):
 		"""
 		"""
 		print(">>res: ", response.css("#myTable").css("tbody"))
-		for item in response.css("#myTable").css("tbody"):
+		for item in response.css("#data").css("tbody"):
 			row = item.css(".symbol").css("a::text").extract_first()
 			print(row)
 			

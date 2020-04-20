@@ -50,19 +50,6 @@ class CrawlerInfo(scrapy.Spider):
 
 		]
 
-		# script = """
-		# 	function main(splash)
-		# 	local url = splash.args.url
-		# 	assert(splash:go(url))
-		# 	assert(splash:wait(0.5))
-		# 	assert(splash:runjs("$('.next')[0].click();"))
-		# 	return {
-		# 	html = splash:html(),
-		# 	url = splash:url(),
-		# 	}
-		# 	end
-		# """
-
 		for url in urls:
 			print(">>: ", url)
 			print("ress", scrapy.Request(url=url, method='GET').body)
@@ -81,7 +68,7 @@ class CrawlerInfo(scrapy.Spider):
 		try:
 			if file.endswith(".pdf"):
 				item["link_pdf"] = file
-				# tqdm.tqdm(get_file(file))
+				tqdm.tqdm(get_file(file))
 			else:
 				item["link_info"] = file
 		except Exception as e:
@@ -98,7 +85,6 @@ class CrawlerInfo(scrapy.Spider):
 		"""
 		all_data = []
 		link_duplicated = []
-		print(">>>response: ", response)
 		for item in tqdm.tqdm(response.css("#divEvents").css("ul").css('li')):
 			link = item.css("a::attr(href)").extract_first()
 			if link not in link_duplicated:
