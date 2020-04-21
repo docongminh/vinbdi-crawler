@@ -40,7 +40,6 @@ class CrawlerInfo(scrapy.Spider):
 		urls = [
 				# "https://s.cafef.vn/Tin-doanh-nghiep/fpt/Event.chn"
 				# "https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=FPT&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
-				# "https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=FPT&floorID=0&configID=0&PageIndex=1&PageSize=30&Type=2",
 				# "https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=HPS&floorID=0&configID=0&PageIndex=1&PageSize=200&Type=2",
 				# "https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=CRE&floorID=0&configID=0&PageIndex=1&PageSize=150&Type=2",
 				# "https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=A32&floorID=0&configID=0&PageIndex=1&PageSize=100&Type=2",
@@ -58,7 +57,18 @@ class CrawlerInfo(scrapy.Spider):
 				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=ANT&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
 				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=AGM&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
 				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=API&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
-				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=AMV&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2"
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=AMV&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=CMC&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=AAV&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=ABC&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=ACV&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=ADG&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=ABT&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=ACC&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=ACE&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=ACM&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2",
+				"https://s.cafef.vn/Ajax/Events_RelatedNews_New.aspx?symbol=ACS&floorID=0&configID=0&PageIndex=1&PageSize=10000&Type=2"
+
 
 
 		]
